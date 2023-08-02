@@ -38,7 +38,7 @@ setLegend(
 ................
 ................
 ................
-................`]
+................`],
   [ cheese, bitmap`
 ................
 ................
@@ -108,10 +108,22 @@ setPushables({
   [ player ]: []
 })
 
-onInput("s", () => {
-  getFirst(player).y += 1
+onInput("a", () => {
+  getFirst(player).x -= 1
 })
 
+onInput("d", () => {
+  getFirst(player).x += 1
+})
+
+function randFood() {
+  let num = Math.random() * (5 - 1) + 1
+  if (num == 1)
+    let food = 'meat'
+
+function runGame() {
+  addSprite(rand.range(0, 160), 0, randFood)
+}
 afterInput(() => {
   
 })
