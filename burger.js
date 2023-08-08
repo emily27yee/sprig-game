@@ -110,7 +110,7 @@ setLegend(
 ................`]
 )
 
-setSolids([player, meat, cheese, tomato, lettuce, topBun])
+setSolids([player])
 
 let level = 0
 const levels = [
@@ -135,17 +135,11 @@ onInput("a", () => {
 onInput("d", () => {
   getFirst(player).x += 1
 })
-/*
-function addSprite(x, y, spriteType) {
-  return {
-    type: spriteType,
-    x: x,
-    y: y,
-  };
-}
-*/
+
+const foodTypes = [meat, cheese, tomato, lettuce, topBun];
+
 function randFood() {
-  let num = Math.floor(Math.random() * 5 + 1)
+  let num = Math.floor(Math.random() * 5 + 1);
   if (num == 1)
     return meat;
   else if (num == 2)
@@ -168,20 +162,24 @@ function addFood() {
 }
 
 function fallingFood() {
-  getAll(foods).forEach((food) => {
-    food.y += 1;
-  });
+  foodTypes.forEach(type => {
+    getAll(type).forEach(food => {
+      food.y += 1
+    }) 
+  })
 }
 
 function removeFood() {
-  getAll(foods).forEach((food) => {
-    if (food.y >= 5) {
-      let x = food.x;
-      let y = food.y;
-      food.remove();
-      clearTile(x, y);
-    }
-  });
+  foodTypes.forEach(type => {
+    getAll(type).forEach(food => {
+      if (food.y == 4) {
+        let x = food.x;
+        let y = food.y;
+        food.remove();
+        clearTile(x, y);
+      }
+    })
+  })
 }
 
 var runGame = setInterval(() => {
