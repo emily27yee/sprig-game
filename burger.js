@@ -3,6 +3,7 @@ const meat = "m"
 const cheese = "c"
 const tomato = "t"
 const lettuce = "l"
+const topBun = "b"
 
 setLegend(
   [ player, bitmap`
@@ -56,7 +57,7 @@ setLegend(
 ................
 ................
 ................`],
-  [tomato, bitmap`
+  [ tomato, bitmap`
 ................
 ................
 ................
@@ -73,7 +74,7 @@ setLegend(
 ................
 ................
 ................`],
-  [lettuce, bitmap`
+  [ lettuce, bitmap`
 ................
 ................
 ................
@@ -89,17 +90,36 @@ setLegend(
 ................
 ................
 ................
+................`],
+  [ topBun, bitmap`
+................
+................
+................
+.....CCCC2C.....
+....CC6C6CCC....
+...C6CCCCC6CC...
+..CCC2C6CCC2CC..
+..CCCCCCCCCCCC..
+................
+................
+................
+................
+................
+................
+................
 ................`]
 )
 
-setSolids([])
+setSolids([player, meat, cheese, tomato, lettuce, topBun])
 
 let level = 0
 const levels = [
   map`
-...
-...
-.p.`
+.....
+.....
+.....
+.....
+..p..`
 ]
 
 setMap(levels[level])
@@ -115,15 +135,57 @@ onInput("a", () => {
 onInput("d", () => {
   getFirst(player).x += 1
 })
-
-function randFood() {
-  let num = Math.random() * (5 - 1) + 1
-  if (num == 1)
-    let food = 'meat'
-
-function runGame() {
-  addSprite(rand.range(0, 160), 0, randFood)
+/*
+function addSprite(x, y, spriteType) {
+  return {
+    type: spriteType,
+    x: x,
+    y: y,
+  };
 }
-afterInput(() => {
-  
-})
+*/
+function randFood() {
+  let num = Math.floor(Math.random() * 5 + 1)
+  if (num == 1)
+    return meat;
+  else if (num == 2)
+    return cheese;
+  else if (num == 3)
+    return tomato;
+  else if (num == 4)
+    return lettuce;
+  else
+    return topBun;
+}
+
+let foods = [];
+
+function addFood() {
+  let x = Math.floor(Math.random() * 5);
+  let y = 0;
+  let newFood = addSprite(x, y, randFood());
+  foods.push(newFood);
+}
+
+function fallingFood() {
+  getAll(foods).forEach((food) => {
+    food.y += 1;
+  });
+}
+
+function removeFood() {
+  getAll(foods).forEach((food) => {
+    if (food.y >= 5) {
+      let x = food.x;
+      let y = food.y;
+      food.remove();
+      clearTile(x, y);
+    }
+  });
+}
+
+var runGame = setInterval(() => {
+  addFood();
+  fallingFood();
+  removeFood();
+}, 1000);
