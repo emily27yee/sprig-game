@@ -128,28 +128,29 @@ setPushables({
   [ player ]: []
 })
 
+let collectedFood = [];
+
 onInput("a", () => {
   getFirst(player).x -= 1
+  
+  collectedFood.forEach((food) => {
+    food.x = getFirst(player).x
+  })
 })
 
 onInput("d", () => {
   getFirst(player).x += 1
+  
+  collectedFood.forEach((food) => {
+    food.x = getFirst(player).x
+  })
 })
 
 const foodTypes = [meat, cheese, tomato, lettuce, topBun];
 
 function randFood() {
-  let num = Math.floor(Math.random() * 5 + 1);
-  if (num == 1)
-    return meat;
-  else if (num == 2)
-    return cheese;
-  else if (num == 3)
-    return tomato;
-  else if (num == 4)
-    return lettuce;
-  else
-    return topBun;
+  let num = Math.floor(Math.random() * 5);
+  return foodTypes[num];
 }
 
 let foods = [];
@@ -177,6 +178,16 @@ function removeFood() {
         let y = food.y;
         food.remove();
         clearTile(x, y);
+      }
+    })
+  })
+}
+
+function stackingFood() {
+  foodTypes.forEach(type => {
+    getAll(type).forEach(food => {
+      if (food.x === getFirst(player).x && food.y === getFirst(player).y) {
+        collectedFood.push(food)
       }
     })
   })
