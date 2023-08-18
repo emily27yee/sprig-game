@@ -254,16 +254,20 @@ let collectedFood2 = [];
 onInput("a", () => {
   getFirst(player).x -= 1
   
-  collectedFood1.forEach((food) => {
-    food.x = getFirst(player).x
+  foodTypes2.forEach(type => {
+    getAll(type).forEach(food => {
+      food.x -= 1
+    })
   })
 })
 
 onInput("d", () => {
   getFirst(player).x += 1
-  
-  collectedFood1.forEach((food) => {
-    food.x = getFirst(player).x
+
+  foodTypes2.forEach(type => {
+    getAll(type).forEach(food => {
+      food.x += 1
+    })
   })
 })
 
