@@ -231,23 +231,57 @@ const foodMap = {
 setSolids([player])
 
 let level = 0
-const levels = [
+const levels = [map`
+.....
+.....
+.....
+.....
+.....`,
   map`
 1....
 .....
 .....
 .....
-..p..`
+..p..`,
+  map `
+2....
+.....
+.....
+.....
+.....`
 ]
 
 setMap(levels[level])
+
+addText("Burger Builder", {x: 3, y: 1, color: `black`})
+addText("to start: \npress L", {x: 3, y: 5, color: `black`})
+addText("move bun with \nA and D", {x: 3, y: 8, color: `black`})
 
 setPushables({
   [ player ]: []
 })
 
+let hasStartedGame = false;
+
+function startGame() {
+  
+  if (level == 0)
+    hasStartedGame = false;
+  
+  onInput("l", () => {
+    hasStartedGame = true;
+    clearText()
+    level = 1
+    setMap(levels[level])
+  })
+}
+
+const foodTypes = [meat, cheese, tomato, lettuce, topBun];
+const foodTypes2 = [meat2, cheese2, tomato2, lettuce2, topBun2];
+
 const level1burger = ['m', 'c', 'b'];
-const burgerLevels = [level1burger];
+const level2burger = ['m', 'l', 't', 'b'];
+const burgerLevels = [level1burger, level2burger];
 let collectedFood1 = [];
 let collectedFood2 = [];
 
@@ -270,9 +304,6 @@ onInput("d", () => {
     })
   })
 })
-
-const foodTypes = [meat, cheese, tomato, lettuce, topBun];
-const foodTypes2 = [meat2, cheese2, tomato2, lettuce2, topBun2];
 
 function randFood() {
   let num = Math.floor(Math.random() * 5);
@@ -315,21 +346,17 @@ function removeFood() {
 }
 
 let mapping;
-let collectedFoodImage;
 
 function stackingFood() {
   foodTypes.forEach(type => {
     getAll(type).forEach(food => {
       if (food.x === getFirst(player).x && food.y === getFirst(player).y) {
         mapping = foodMap[food.type];
-        collectedFoodImage = addSprite(food.x, food.y, mapping);
-        console.log(food.y)
-        console.log(collectedFoodImage);
+        let collectedFoodImage = addSprite(getFirst(player).x, getFirst(player).y, mapping)
         collectedFood1.push(collectedFoodImage);
         collectedFood2.push(food.type);
         food.remove();
-        //console.log(collectedFood1)
-        
+        console.log(collectedFoodImage);
       }
     })
   })
@@ -340,7 +367,7 @@ function checkWin() {
   if (burgerLevels[level].length !== collectedFood1.length) {
     win = false;
   }
-  // not working yet
+  
   for (let i = 0; i < burgerLevels[level].length && collectedFood2.length; i++) {
     if (burgerLevels[level][i] === collectedFood2[i]) {
       win = true;
@@ -356,25 +383,36 @@ function checkWin() {
               y: 0,
               color: color`black`
             });
+    level += 1;
+    setLevel();
   }
   else {
-      addText("You Lose", {
-              x: 10,
-              y: 0,
-              color: color`black`
-            });
+    addText("You Lose", {
+            x: 10,
+            y: 0,
+            color: color`black`
+          });
+    clearInterval(runGame);
   }
-  clearInterval(runGame);
+}
+
+function setLevel() {
+  collectedFood1 = [];
+  collectedFood2 = [];
+  setMap(levels[level])
 }
 
 var runGame = setInterval(() => {
-  addFood();
-  fallingFood();
-  removeFood();
-  stackingFood();
-  // this works
-  if (collectedFood2.includes(topBun)) {
-    console.log("Finished")
-    checkWin();
+  startGame();
+  if (hasStartedGame) {
+    addFood();
+    fallingFood();
+    removeFood();
+    stackingFood();
+    
+    if (collectedFood2.includes(topBun)) {
+      console.log("Finished")
+      checkWin();
+    }
   }
 }, 1000);
