@@ -4,13 +4,18 @@ const cheese = "c"
 const tomato = "t"
 const lettuce = "l"
 const topBun = "b"
-const burger1 = "1"
 
 const meat2 = "e"
 const cheese2 = "h"
 const tomato2 = "o"
 const lettuce2 = "u"
 const topBun2 = "n"
+
+const burger1 = "1"
+const burger2 = "2"
+const burger3 = "3"
+const burger4 = "4"
+const burger5 = "5"
 
 setLegend(
   [ player, bitmap`
@@ -37,12 +42,12 @@ setLegend(
 ................
 ................
 ................
-...C0CC0CC03C...
-..C0CC0CC0CC0C..
-..0CC0C30CC0CC..
-...C0CC0C30CC...
 ................
 ................
+...CC00CC00CC...
+..CC00CC00CC00..
+..C00CC00CC00C..
+...0CC00CC00C...
 ................
 ................
 ................
@@ -72,10 +77,10 @@ setLegend(
 ................
 ................
 ................
-....3333333333..
-...339399939333.
-...333939393933.
-....3333333333..
+...3333333333...
+..333939993933..
+..339393939393..
+...3333333333...
 ................
 ................
 ................
@@ -115,23 +120,6 @@ setLegend(
 ................
 ................
 ................`],
-  [ burger1, bitmap`
-5555555555555555
-5....C2CC2C....5
-5..CC2C2CC2CC..5
-5.CCCCCCCCCCCC.5
-5..............5
-5.666666666666.5
-5...66666666...5
-5......66......5
-5..............5
-5..C00CC00CC0..5
-5.C00CC00CC00C.5
-5..0CC00CC00C..5
-5..............5
-5.CCCCCCCCCCCC.5
-5...CCCCCCCC...5
-5555555555555555`],
 
   [ meat2, bitmap`
 ................
@@ -140,12 +128,12 @@ setLegend(
 ................
 ................
 ................
-...C0CC0CC03C...
-..C0CC0CC0CC0C..
-..0CC0C30CC0CC..
-...C0CC0C30CC...
 ................
 ................
+...CC00CC00CC...
+..CC00CC00CC00..
+..C00CC00CC00C..
+...0CC00CC00C...
 ................
 ................
 ................
@@ -171,14 +159,14 @@ setLegend(
 ................
 ................
 ................
+...3333333333...
+..333939993933..
+..339393939393..
+...3333333333...
 ................
 ................
 ................
 ................
-....3333333333..
-...339399939333.
-...333939393933.
-....3333333333..
 ................
 ................
 ................
@@ -218,6 +206,92 @@ setLegend(
 ................
 ................
 ................`],
+
+  [ burger1, bitmap`
+5555555555555555
+5....C2CC2C....5
+5..CC2C2CC2CC..5
+5.CCCCCCCCCCCC.5
+5..............5
+5.666666666666.5
+5...66666666...5
+5......66......5
+5..............5
+5..C00CC00CC0..5
+5.C00CC00CC00C.5
+5..0CC00CC00C..5
+5..............5
+5.CCCCCCCCCCCC.5
+5...CCCCCCCC...5
+5555555555555555`],
+  [ burger2, bitmap`
+5555555555555555
+5....C2CC2C....5
+5..CC2C2CC2CC..5
+5.CC2C2CC2CC2C.5
+5.CCCCCCCCCCCC.5
+5.333333333333.5
+5..3333333333..5
+5.DDDD44DD44D4.5
+5.4D.4DD.D4D.D.5
+5..C0CD0CC0CC..5
+5.C0C00CC00C0C.5
+5..C00C000C00..5
+5.CCCCCCCCCCCC.5
+5.CCCCCCCCCCCC.5
+5...CCCCCCCC...5
+5555555555555555`],
+  [ burger3, bitmap`
+5555555555555555
+5....C2CC2C....5
+5..CC2C2CC2CC..5
+5.CC2C2CC2CC2C.5
+5.CCCCCCCCCCCC.5
+5.666666666666.5
+5..6666666666..5
+5.....6666.....5
+5.333333333333.5
+5..3333333333..5
+5.DDDD44DD44D4.5
+5.4D.4DD.D4D.D.5
+5.CCCCCCCCCCCC.5
+5.CCCCCCCCCCCC.5
+5...CCCCCCCC...5
+5555555555555555`],
+  [ burger4, bitmap`
+5555555555555555
+5....C2CC2C....5
+5..CC2C2CC2CC..5
+5.CC2C2CC2CC2C.5
+5.CCCCCCCCCCCC.5
+5.666666666666.5
+5..6666666666..5
+5.DDDD466D44D4.5
+5.4D.4DD.D4D.D.5
+5..C0CD0CC0CC..5
+5.C0C00CC00C0C.5
+5..C00C000C00..5
+5.CCCCCCCCCCCC.5
+5.CCCCCCCCCCCC.5
+5...CCCCCCCC...5
+5555555555555555`],
+  [ burger5, bitmap`
+5555555555555555
+5....C2CC2C....5
+5..CC2C2CC2CC..5
+5.CCCCCCCCCCCC.5
+5.666666666666.5
+5....666666....5
+5.333333333333.5
+5.333333333333.5
+5.4DDD44DD44DD.5
+5.DD.4DD.D4D.D.5
+5..0CC00CC00C..5
+5.0CC00CC00C0C.5
+5..C00CC00CC0..5
+5.CCCCCCCCCCCC.5
+5...CCCCCCCC...5
+5555555555555555`],
 )
 
 const foodMap = {
@@ -248,40 +322,70 @@ const levels = [map`
 .....
 .....
 .....
-.....`
+..p..`,
+  map`
+3....
+.....
+.....
+.....
+..p..`,
+  map`
+4....
+.....
+.....
+.....
+..p..`,
+  map`
+5....
+.....
+.....
+.....
+..p..`
 ]
 
 setMap(levels[level])
-
-addText("Burger Builder", {x: 3, y: 1, color: `black`})
-addText("to start: \npress L", {x: 3, y: 5, color: `black`})
-addText("move bun with \nA and D", {x: 3, y: 8, color: `black`})
 
 setPushables({
   [ player ]: []
 })
 
 let hasStartedGame = false;
+let speed = 1000;
 
 function startGame() {
-  
-  if (level == 0)
+  speed = 1000;
+  if (level == 0) {
     hasStartedGame = false;
+    addText("Burger Builder", {x: 3, y: 1, color: color`5`})
+    addText("to start: \npress L", {x: 3, y: 5, color: `black`})
+    addText("move bun with \nA and D", {x: 3, y: 8, color: `black`})
+    addText("catch food to \nbuild burger!", {x: 3, y: 12, color: color`H`})
+  }
   
   onInput("l", () => {
-    hasStartedGame = true;
-    clearText()
-    level = 1
-    setMap(levels[level])
+    if (!hasStartedGame) {
+      hasStartedGame = true;
+      clearText()
+      level = 1
+      setMap(levels[level])
+    }
   })
 }
+
+onInput("j", () => {
+  level = 0
+  restartGame()
+})
 
 const foodTypes = [meat, cheese, tomato, lettuce, topBun];
 const foodTypes2 = [meat2, cheese2, tomato2, lettuce2, topBun2];
 
 const level1burger = ['m', 'c', 'b'];
 const level2burger = ['m', 'l', 't', 'b'];
-const burgerLevels = [level1burger, level2burger];
+const level3burger = ['l', 't', 'c', 'b'];
+const level4burger = ['m', 'l', 'c', 'b'];
+const level5burger = ['m', 'l', 't', 'c', 'b'];
+const burgerLevels = [level1burger, level2burger, level3burger, level4burger, level5burger];
 let collectedFood1 = [];
 let collectedFood2 = [];
 
@@ -314,7 +418,7 @@ let foods = [];
 
 function addFood() {
   let x = Math.floor(Math.random() * 5);
-  let y
+  let y;
   if (x == 0)
     y = 1;
   else
@@ -328,7 +432,7 @@ function fallingFood() {
     getAll(type).forEach(food => {
       setTimeout(() => {
         food.y += 1;
-      }, 1000)
+      }, speed)
     }) 
   })
 }
@@ -356,43 +460,73 @@ function stackingFood() {
         collectedFood1.push(collectedFoodImage);
         collectedFood2.push(food.type);
         food.remove();
-        console.log(collectedFoodImage);
       }
     })
   })
 }
 
 let win = false;
+
 function checkWin() {
-  if (burgerLevels[level].length !== collectedFood1.length) {
+  if (burgerLevels[level - 1].length !== collectedFood2.length) {
     win = false;
+    console.log("diff length")
   }
   
-  for (let i = 0; i < burgerLevels[level].length && collectedFood2.length; i++) {
-    if (burgerLevels[level][i] === collectedFood2[i]) {
+  for (let i = 0; i < burgerLevels[level - 1].length && i < collectedFood2.length; i++) {
+    if (burgerLevels[level - 1][i] === collectedFood2[i]) {
       win = true;
     }
     else {
       win = false;
+      console.log("diff ingredients")
       break;
     }
   }
   if (win) {
     addText("You Win", {
-              x: 10,
-              y: 0,
+              x: 6,
+              y: 4,
               color: color`black`
             });
-    level += 1;
-    setLevel();
+    addText(`Level ${level + 1}`, {
+              x: 6,
+              y: 7,
+              color: color`L`
+            });
+    speed -= 20;
+    if (level < 5) {
+      console.log("level is " + level)
+      addText("press I", {x: 6, y: 10, color: color`L`})
+      level += 1;
+      clearInterval(runGameInterval);
+      console.log(win)
+      onInput("i", () => {
+        if (win) {
+          setLevel();
+          runGameInterval = setInterval(gameLoop, speed);
+          win = false;
+        }
+      })
+    }
+    else {
+      clearText()
+      addText("You beat the game!", {
+              x: 6,
+              y: 4,
+              color: color`H`
+            });
+    }
+  //win = false;
   }
   else {
     addText("You Lose", {
-            x: 10,
-            y: 0,
+            x: 6,
+            y: 5,
             color: color`black`
           });
-    clearInterval(runGame);
+    addText("to restart: \npress J", {x: 5, y: 8, color: color`L`})
+    clearInterval(runGameInterval);
   }
 }
 
@@ -400,19 +534,35 @@ function setLevel() {
   collectedFood1 = [];
   collectedFood2 = [];
   setMap(levels[level])
+  clearText()
 }
 
-var runGame = setInterval(() => {
-  startGame();
-  if (hasStartedGame) {
+function restartGame() {
+  clearInterval(runGameInterval);
+  setLevel();
+  hasStartedGame = false;
+  runGameInterval = setInterval(gameLoop, 1000);
+  speed = 1000;
+}
+
+let runGameInterval;
+
+function gameLoop() {
+  if (!hasStartedGame)
+    startGame();
+  else {
     addFood();
     fallingFood();
     removeFood();
     stackingFood();
     
     if (collectedFood2.includes(topBun)) {
+      console.log(collectedFood2)
       console.log("Finished")
       checkWin();
     }
   }
-}, 1000);
+}
+
+runGameInterval = setInterval(gameLoop, 1000);
+
